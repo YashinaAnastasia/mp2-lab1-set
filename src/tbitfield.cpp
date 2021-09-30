@@ -11,18 +11,14 @@
 static const int FAKE_INT = -1;
 static TBitField FAKE_BITFIELD(1);
 
-TBitField::TBitField(int len)
+TBitField::TBitField(int _BitLen)
 {
-    if (len < 0)
-        throw len;
-    else
-    {
-        BitLen = len;
-        MemLen = BitLen / (sizeof(TELEM) * 8) + 1;
+        BitLen =_BitLen;
+        MemLen = (_BitLen-1) / 32 + 1;
         pMem = new TELEM[MemLen];
         for (int i = 0; i < MemLen; i++)
             pMem[i] = 0;
-    }
+    
 }
 
 TBitField::TBitField(const TBitField &bf) // конструктор копирования
